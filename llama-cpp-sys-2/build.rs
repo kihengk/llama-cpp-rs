@@ -1273,6 +1273,12 @@ fn main() {
         println!("{link}",);
     }
 
+    // ggml-openvino is a static archive that calls into oneTBB.  Keep this
+    // after the ggml archives so linkers using --as-needed retain libtbb.
+    if cfg!(feature = "openvino") && !build_shared_libs {
+        println!("cargo:rustc-link-lib=dylib=tbb");
+    }
+
     // OpenMP
     if cfg!(feature = "openmp") && target_triple.contains("gnu") {
         if cfg!(feature = "static-openmp") {
