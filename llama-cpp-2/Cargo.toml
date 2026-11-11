@@ -30,6 +30,7 @@ default = ["openmp", "android-shared-stdcxx", "common"]
 # backwards compatibility.
 common = ["llama-cpp-sys-2/common"]
 cuda = ["llama-cpp-sys-2/cuda"]
+openvino = ["llama-cpp-sys-2/openvino"]
 cuda-no-vmm = ["cuda", "llama-cpp-sys-2/cuda-no-vmm"]
 metal = ["llama-cpp-sys-2/metal"]
 dynamic-link = ["llama-cpp-sys-2/dynamic-link"]

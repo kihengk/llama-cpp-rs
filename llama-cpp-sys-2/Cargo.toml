@@ -68,6 +68,7 @@ default = ["common"]
 # Enabled by default to preserve backwards compatibility.
 common = []
 cuda = []
+openvino = []
 # Disables the need to dynamically link against libcuda.so / cuda.dll
 cuda-no-vmm = ["cuda"]
 metal = []

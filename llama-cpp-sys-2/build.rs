@@ -922,6 +922,14 @@ fn main() {
         }
     }
 
+    if cfg!(feature = "openvino") {
+        assert!(
+            matches!(target_os, TargetOs::Linux | TargetOs::Windows(_)),
+            "the OpenVINO backend is currently supported only on Linux and Windows"
+        );
+        config.define("GGML_OPENVINO", "ON");
+    }
+
     if cfg!(feature = "rocm") {
         config.define("GGML_HIP", "ON");
     }
@@ -1166,6 +1174,11 @@ fn main() {
         );
 
         println!("cargo:rustc-link-lib=dylib=mkl_rt");
+    }
+
+    if cfg!(feature = "openvino") && !build_shared_libs {
+        println!("cargo:rustc-link-lib=dylib=openvino");
+        println!("cargo:rustc-link-lib=dylib=OpenCL");
     }
 
     // MTMD depends on the hashing functionality.
